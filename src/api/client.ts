@@ -54,6 +54,11 @@ export type MeetingType =
   | "One-on-One"
   | "Other";
 
+export interface ProjectRef {
+  project_id: string;
+  project_name: string;
+}
+
 export interface MeetingMatch {
   id: string;
   title: string;
@@ -64,6 +69,8 @@ export interface MeetingMatch {
   topics: string[];
   decisions: string[];
   action_items: string[];
+  /** Real project id↔name pairs from the knowledge base. */
+  projects: ProjectRef[];
   score: number;
   summary: string | null;
   /** Blob filename stored in Pinecone. Null for legacy seeded meetings. */
