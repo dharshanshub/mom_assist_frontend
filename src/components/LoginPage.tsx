@@ -21,26 +21,6 @@ function EyeOffIcon() {
   );
 }
 
-/* ── New brand mark: ascending signal bars + orbiting pulse, gradient ───────── */
-function GradientPulseMark({ size = 40 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <defs>
-        <linearGradient id="authBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#fdba74" />
-          <stop offset="55%" stopColor="#f97316" />
-          <stop offset="100%" stopColor="#dc2626" />
-        </linearGradient>
-      </defs>
-      <rect x="2.5"  y="13" width="3.6" height="8"    rx="1.8" fill="url(#authBrandGrad)" fillOpacity=".7"/>
-      <rect x="7.8"  y="8.5" width="3.6" height="12.5" rx="1.8" fill="url(#authBrandGrad)" fillOpacity=".88"/>
-      <rect x="13.1" y="4"  width="3.6" height="17"   rx="1.8" fill="url(#authBrandGrad)"/>
-      <circle cx="19.8" cy="6" r="2.3" fill="url(#authBrandGrad)"/>
-      <circle cx="19.8" cy="6" r="4" stroke="url(#authBrandGrad)" strokeOpacity=".4" strokeWidth="1.1"/>
-    </svg>
-  );
-}
-
 function LockIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -186,91 +166,82 @@ export function LoginPage() {
         </div>
 
         <div className="auth-card">
-        <div className="auth-card-glow" />
+          <div className="auth-card-glow" />
 
-        <div className="auth-brandrow">
-          <div className="auth-logo">
-            <GradientPulseMark size={34} />
-            <span className="auth-logo-ring" />
+          <div className="auth-eyebrow">
+            <span className="auth-eyebrow-dot" /> Secure workspace access
           </div>
-          <div className="auth-brandtext">
-            <div className="auth-brand">MoM Assist</div>
-            <div className="auth-brand-sub">Meeting Intelligence</div>
-          </div>
-        </div>
+          <h1 className="auth-title">Welcome back</h1>
+          <p className="auth-lead">
+            Sign in to ask your meeting minutes anything — decisions, action items,
+            and project history, instantly.
+          </p>
 
-        <div className="auth-eyebrow">
-          <span className="auth-eyebrow-dot" /> Secure workspace access
-        </div>
-        <h1 className="auth-title">Welcome back</h1>
-        <p className="auth-lead">
-          Sign in to ask your meeting minutes anything — decisions, action items,
-          and project history, instantly.
-        </p>
-
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="auth-field-group">
-            <label className="auth-label">Username</label>
-            <input
-              className="auth-input"
-              type="text"
-              autoComplete="username"
-              autoFocus
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              disabled={loading}
-              placeholder="your.username"
-            />
-          </div>
-
-          <div className="auth-field-group">
-            <label className="auth-label">Password</label>
-            <div className="auth-pw-wrap">
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="auth-field-group">
+              <label className="auth-label">Username</label>
               <input
-                className="auth-input auth-input-pw"
-                type={showPassword ? "text" : "password"}
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                className="auth-input"
+                type="text"
+                autoComplete="username"
+                autoFocus
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 disabled={loading}
-                placeholder="••••••••"
+                placeholder="your.username"
               />
-              <button
-                type="button"
-                className="auth-pw-toggle"
-                onClick={() => setShowPassword((v) => !v)}
-                tabIndex={-1}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-              </button>
             </div>
-          </div>
 
-          {error && <div className="auth-error">{error}</div>}
+            <div className="auth-field-group">
+              <label className="auth-label">Password</label>
+              <div className="auth-pw-wrap">
+                <input
+                  className="auth-input auth-input-pw"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  className="auth-pw-toggle"
+                  onClick={() => setShowPassword((v) => !v)}
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+                </button>
+              </div>
+            </div>
 
-          <button
-            className="auth-btn"
-            type="submit"
-            disabled={loading || !username.trim() || !password}
-          >
-            {loading ? <span className="auth-spinner" /> : null}
-            {loading ? "Signing in…" : "Sign in to workspace"}
-          </button>
-        </form>
+            {error && <div className="auth-error">{error}</div>}
 
-        <div className="auth-features">
-          <div className="auth-feature"><span className="auth-feature-ic"><SearchHeroIcon /></span>Semantic search</div>
-          <div className="auth-feature"><span className="auth-feature-ic"><BrainIcon /></span>AI summaries</div>
-          <div className="auth-feature"><span className="auth-feature-ic"><DocIcon /></span>Auto extraction</div>
-        </div>
-
-        <div className="auth-foot">
-          <span className="auth-foot-pill"><LockIcon /> Encrypted</span>
-          <span className="auth-foot-pill"><BoltIcon /> GPT-4o</span>
-          <span className="auth-foot-copy">© 2026 MoM Assist</span>
-        </div>
+            <button
+              className="auth-btn"
+              type="submit"
+              disabled={loading || !username.trim() || !password}
+            >
+              {loading ? <span className="auth-spinner" /> : null}
+              {loading ? "Signing in…" : "Sign in to workspace"}
+            </button>
+          </form>
         </div>{/* end auth-card */}
+
+        {/* feature highlights + trust — on the dark background, not in the card */}
+        <div className="auth-belowcard">
+          <div className="auth-belowfeatures">
+            <span className="auth-bf"><SearchHeroIcon /> Semantic search</span>
+            <span className="auth-bf"><BrainIcon /> AI summaries</span>
+            <span className="auth-bf"><DocIcon /> Auto extraction</span>
+          </div>
+          <div className="auth-belowfoot">
+            <span className="auth-bf-pill"><LockIcon /> Encrypted</span>
+            <span className="auth-bf-pill"><BoltIcon /> GPT-4o</span>
+            <span className="auth-bf-copy">© 2026 MoM Assist</span>
+          </div>
+        </div>
       </div>{/* end auth-stack */}
     </div>
   );
