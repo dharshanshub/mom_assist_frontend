@@ -8,8 +8,8 @@ interface Props {
 }
 
 const AVATAR_BG = [
-  "#4f46e5", "#7c3aed", "#0891b2", "#059669",
-  "#d97706", "#dc2626", "#db2777", "#2563eb",
+  "#ea580c", "#c2410c", "#b45309", "#9a3412",
+  "#a16207", "#92400e", "#7c2d12", "#854d0e",
 ];
 const avatarBg = (title: string) => AVATAR_BG[title.charCodeAt(0) % AVATAR_BG.length];
 const initials = (title: string) =>
@@ -17,8 +17,8 @@ const initials = (title: string) =>
 
 function scoreScheme(score: number) {
   if (score >= 0.82) return { bg: "rgba(22,163,74,0.09)",  border: "rgba(22,163,74,0.28)",  color: "#15803d", label: "Excellent" };
-  if (score >= 0.68) return { bg: "rgba(249,115,22,0.09)", border: "rgba(249,115,22,0.28)", color: "#c2410c", label: "Good" };
-  return { bg: "rgba(37,99,235,0.09)", border: "rgba(37,99,235,0.28)", color: "#1d4ed8", label: "Fair" };
+  if (score >= 0.68) return { bg: "rgba(234,88,12,0.09)", border: "rgba(234,88,12,0.24)", color: "#c2410c", label: "Good" };
+  return { bg: "rgba(28,23,20,0.05)", border: "rgba(28,23,20,0.13)", color: "#57534e", label: "Fair" };
 }
 
 function CloseIcon() {
