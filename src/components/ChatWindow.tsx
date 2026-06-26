@@ -131,10 +131,31 @@ export function ChatWindow({ sessionId, initialMessages, onMessagesChange }: Pro
     const withUser: ChatMessage[] = [...messages, { role: "user", content: q }];
     push(withUser);
 
-    const history: ConversationMessage[] = withUser.slice(0, -1).map((m) => ({
-      role: m.role,
-      content: m.content,
-    }));
+    // Carry citations forward: for past assistant turns that returned meetings,
+    // append the exact project ID↔name pairs so follow-ups can cite real IDs
+    // instead of fabricating them (e.g. "001, 002").
+    const history: ConversationMessage[] = withUser.slice(0, -1).map((m) => {
+      if (m.role === "assistant" && m.meetings && m.meetings.length > 0) {
+        const refLines = m.meetings
+          .map((mt) => {
+            const projs = (mt.projects ?? [])
+              .map((p) => `${p.project_id || "(no ID recorded)"} = ${p.project_name}`)
+              .join("; ");
+            return projs ? `- ${mt.date} ${mt.meeting_type}: ${projs}` : null;
+          })
+          .filter(Boolean)
+          .join("\n");
+        if (refLines) {
+          return {
+            role: m.role,
+            content:
+              `${m.content}\n\n[Reference data — exact project IDs from the records shown for this answer; ` +
+              `use these verbatim if asked and never invent IDs:\n${refLines}]`,
+          };
+        }
+      }
+      return { role: m.role, content: m.content };
+    });
 
     // Meeting cards are intentionally withheld until streaming finishes — they
     // are attached to the final pushed message below, not shown live.
