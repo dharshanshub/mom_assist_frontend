@@ -340,18 +340,20 @@ html, body, #root {
 }
 .chat-topbar-title {
   position: relative; z-index: 1;
-  flex: 1; min-width: 0; font-size: 14.5px; font-weight: 700; color: #f8fafc;
+  flex: 1; min-width: 0; font-size: 15px; font-weight: 750; color: #f8fafc;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.2px;
 }
-.chat-topbar-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: rgba(253,230,210,.78); font-weight: 600; font-size: 13.5px; }
+.chat-topbar-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: rgba(253,230,210,.82); font-weight: 600; font-size: 13.5px; }
 .chat-topbar-pulse { width: 7px; height: 7px; border-radius: 50%; background: #fb923c; box-shadow: 0 0 8px rgba(249,115,22,.7); animation: pulseDot 1.8s ease-in-out infinite; flex-shrink: 0; }
-.chat-topbar-badges { position: relative; z-index: 1; display: flex; gap: 6px; flex-shrink: 0; }
+.chat-topbar-badges { position: relative; z-index: 1; display: flex; gap: 7px; flex-shrink: 0; }
 .chat-topbar-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 10.5px; font-weight: 600; padding: 4px 11px; border-radius: 20px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: rgba(253,230,210,.75);
+  font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: rgba(253,230,210,.78);
+  transition: background .18s, border-color .18s, color .18s;
 }
-.chat-topbar-badge--ai { background: rgba(249,115,22,.18); border-color: rgba(249,115,22,.4); color: #fed7aa; }
+.chat-topbar-badge:hover { background: rgba(255,255,255,.1); color: #fed7aa; }
+.chat-topbar-badge--ai { background: rgba(249,115,22,.18); border-color: rgba(249,115,22,.42); color: #fed7aa; box-shadow: 0 0 0 1px rgba(249,115,22,.08); }
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────── */
 .sidebar {
@@ -2397,12 +2399,12 @@ html, body, #root {
   background: rgba(249,115,22,.08); border: 1px solid rgba(249,115,22,.2); margin-bottom: 14px;
 }
 .auth-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #f97316; animation: pulseDot 1.8s ease-in-out infinite; }
-.auth-title { font-size: 26px; font-weight: 900; letter-spacing: -.6px; color: #0f172a; margin-bottom: 7px; }
-.auth-lead { font-size: 13px; line-height: 1.6; color: var(--text-2); margin-bottom: 24px; }
+.auth-title { font-size: 27px; font-weight: 900; letter-spacing: -.6px; color: #0f172a; margin-bottom: 8px; }
+.auth-lead { font-size: 13.5px; line-height: 1.6; color: #475569; margin-bottom: 26px; }
 
-.auth-form { display: flex; flex-direction: column; gap: 15px; }
+.auth-form { display: flex; flex-direction: column; gap: 16px; }
 .auth-field-group { display: flex; flex-direction: column; gap: 6px; }
-.auth-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-2); }
+.auth-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0; color: #334155; }
 .auth-input {
   width: 100%; padding: 12px 14px; background: #f7f8fc;
   border: 1.5px solid var(--border-md); border-radius: 11px;
@@ -2424,32 +2426,46 @@ html, body, #root {
 .auth-error { font-size: 13px; color: var(--red); background: var(--red-light); border: 1px solid rgba(220,38,38,.22); border-radius: 9px; padding: 10px 14px; }
 
 .auth-btn {
-  margin-top: 4px; width: 100%; padding: 13px; border: none; border-radius: 12px; cursor: pointer;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 55%, #dc2626 100%); background-size: 200% 100%;
-  color: #fff; font-family: var(--font); font-size: 14px; font-weight: 800;
+  margin-top: 6px; width: 100%; padding: 14px; border: none; border-radius: 12px; cursor: pointer;
+  background: linear-gradient(135deg, #fb8420 0%, #ea580c 100%);
+  color: #fff; font-family: var(--font); font-size: 14.5px; font-weight: 800;
   display: flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: .01em;
-  box-shadow: 0 4px 18px rgba(249,115,22,.4);
-  transition: background-position .35s, box-shadow .2s, transform .2s, filter .2s;
+  box-shadow: 0 6px 20px rgba(234,88,12,.45), inset 0 1px 0 rgba(255,255,255,.25);
+  transition: box-shadow .2s, transform .15s, filter .15s;
 }
-.auth-btn:hover:not(:disabled) { background-position: 100% 50%; filter: brightness(1.08); box-shadow: 0 6px 26px rgba(249,115,22,.55); transform: translateY(-1px); }
-.auth-btn:active { transform: translateY(0); }
-.auth-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.auth-btn:hover:not(:disabled) { filter: brightness(1.06); box-shadow: 0 8px 26px rgba(234,88,12,.6), inset 0 1px 0 rgba(255,255,255,.25); transform: translateY(-1px); }
+.auth-btn:active:not(:disabled) { transform: translateY(0); }
+.auth-btn:disabled {
+  cursor: not-allowed; transform: none;
+  background: #e2e8f0; color: #94a3b8; box-shadow: none;
+}
 .auth-spinner { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
 
-.auth-features { display: flex; gap: 8px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border); }
-.auth-feature { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; font-size: 11px; font-weight: 600; color: var(--text-2); }
-.auth-feature-ic {
-  width: 34px; height: 34px; border-radius: 10px; background: rgba(249,115,22,.08);
-  border: 1px solid rgba(249,115,22,.18); color: #ea580c;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform .18s, background .18s;
+/* ── Below-card: feature highlights + trust, on the dark background ──────────── */
+.auth-belowcard {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  margin-top: 4px; animation: fadeUp .5s ease .15s both;
 }
-.auth-feature:hover .auth-feature-ic { transform: translateY(-2px); background: rgba(249,115,22,.15); }
+.auth-belowfeatures { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.auth-bf {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 600; color: rgba(253,200,150,.78);
+  padding: 7px 13px; border-radius: 20px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(249,115,22,.2);
+  transition: background .18s, border-color .18s, color .18s, transform .18s;
+}
+.auth-bf svg { color: #fb923c; }
+.auth-bf:hover { background: rgba(249,115,22,.12); border-color: rgba(249,115,22,.4); color: #fed7aa; transform: translateY(-1px); }
 
-.auth-foot { display: flex; align-items: center; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
-.auth-foot-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--text-2); padding: 4px 10px; border-radius: 20px; background: var(--bg-subtle); border: 1px solid var(--border-md); }
-.auth-foot-pill svg { color: #ea580c; }
-.auth-foot-copy { margin-left: auto; font-size: 11px; color: var(--text-3); }
+.auth-belowfoot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.auth-bf-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; color: rgba(226,232,245,.55);
+  padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,.1);
+}
+.auth-bf-pill svg { color: #fb923c; }
+.auth-bf-copy { font-size: 11px; color: rgba(226,232,245,.35); }
+
 @media (max-width: 520px) { .auth-card { padding: 26px 22px; } }
 
 .login-split {
@@ -3411,6 +3427,12 @@ html, body, #root {
   background: linear-gradient(120deg, #0a0f1e 0%, #141d33 55%, #1c1108 100%);
   border-bottom: 1px solid rgba(249,115,22,.18);
   padding: 0;
+}
+/* running accent line — consistent with the chat header */
+.pd-hero::after {
+  content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 32%;
+  background: linear-gradient(90deg, transparent, #f97316 40%, #ea580c 70%, transparent);
+  animation: runLine 2.8s cubic-bezier(.4,0,.6,1) infinite; border-radius: 999px; z-index: 2;
 }
 .pd-hero-bg {
   position: absolute; inset: 0; pointer-events: none;
